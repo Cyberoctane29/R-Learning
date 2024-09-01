@@ -1,0 +1,90 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-organize-your-data.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+## Introduction
+
+In this lesson, we will learn how to organize and filter data in R using functions like `arrange`, `group_by`, `summarize`, and `filter`. These functions are essential for turning data into actionable insights. We'll continue working with the Palmer Penguins dataset and explore various ways to sort, group, and filter the data.
+
+## Step 1: Load Required Packages
+
+We will start by loading the core `tidyverse` package, which includes all the necessary functions for this lesson.
+
+```{r}
+library(tidyverse)
+```
+
+## Step 2: Sorting Data with `arrange`
+
+To sort our data by a specific variable, we use the `arrange` function. Let's sort the penguin data by bill length in ascending order:
+
+```{r}
+penguins %>% arrange(bill_length_mm)
+```
+
+To sort the data in descending order, we simply add a minus sign before the column name:
+
+```{r}
+penguins %>% arrange(-bill_length_mm)
+```
+
+## Step 3: Saving Sorted Data
+
+To save the sorted data as a new data frame, we name it and apply the `arrange` function. This ensures that the original data remains intact.
+
+```{r}
+penguins2 <- penguins %>% arrange(-bill_length_mm)
+view(penguins2)
+```
+
+## Step 4: Grouping Data with `group_by` and `summarize`
+
+We can group data by a specific column using the `group_by` function. This is often combined with the `summarize` function to calculate summary statistics for each group. Let's group the data by island and calculate the mean bill length for each group:
+
+```{r}
+penguins %>% group_by(island) %>% drop_na() %>% summarize(mean_bill_length_mm = mean(bill_length_mm))
+```
+
+We can also find the maximum bill length for each island by replacing `mean` with `max`:
+
+```{r}
+penguins %>% group_by(island) %>% drop_na() %>% summarize(max_bill_length_mm = max(bill_length_mm))
+```
+
+## Step 5: Grouping by Multiple Columns
+
+We can group by multiple columns, such as species and island, and then summarize both the maximum and mean bill lengths:
+
+```{r}
+penguins %>% group_by(species, island) %>% drop_na() %>% summarize(max_bl = max(bill_length_mm), mean_bl = mean(bill_length_mm))
+```
+
+## Step 6: Filtering Data with `filter`
+
+To narrow down our analysis to a specific group, we can use the `filter` function. For example, let's filter the data to only include Adelie penguins:
+
+```{r}
+penguins %>% filter(species == "Adelie")
+```
+
+## Conclusion
+
+Being able to organize, group, and filter data is crucial in the data analysis process. These functions in R help make data wrangling more efficient and enable us to extract meaningful insights. In the next lesson, we'll explore functions like `separate`, `unite`, and `mutate` to transform our data even further.
+

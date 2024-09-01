@@ -1,0 +1,100 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-2-dates-and-times-in-r.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Working with Dates and Date-Time in R
+
+This notebook covers basic date and date-time operations using the `tidyverse` and `lubridate` packages in R.
+
+## 1. Install and Load Packages
+
+First, we'll install and load the necessary packages: `tidyverse` for general data manipulation and `lubridate` for working with dates and times.
+
+### Install tidyverse package
+ with `install.packages("tidyverse")`
+
+### Load tidyverse package 
+ with `library(tidyverse)`
+
+# Load lubridate package
+
+```{r}
+library(lubridate)
+```
+
+# Get the Current Date and Date-Time
+
+`lubridate` provides convenient functions to get the current date and time.
+
+```{r}
+# Get the current date
+today()
+
+# Get the current date-time
+now()
+```
+
+# Convert Strings to Dates
+
+You can convert different string formats to dates using `ymd()`, `mdy()`, and `dmy()` functions.
+
+```{r}
+# Convert a string to a date using ymd()
+ymd("2021-01-20")
+
+# Convert a string to a date using mdy()
+mdy("January 20th, 2021")
+
+# Convert a string to a date using dmy()
+dmy("20-Jan-2021")
+
+# Convert unquoted numbers to a date using ymd()
+ymd(20210120)
+```
+
+# Create Date-Time from Date and Time Strings
+
+`lubridate` also allows you to create date-time objects using functions like `ymd_hms()` and `mdy_hm()`.
+
+```{r}
+# Create a date-time from a date using ymd_hms()
+ymd_hms("2021-01-20 20:11:59")
+
+# Create a date-time from a date using mdy_hm()
+mdy_hm("01/20/2021 08:01")
+```
+
+# Convert Date-Time to Date
+
+Finally, you can convert a date-time object to a date using as_date().
+
+```{r}
+# Convert a date-time to a date using as_date()
+as_date(now())
+```
+
+---
+
+## Conclusion
+
+In this notebook, we've explored the basics of working with dates and date-time objects in R using the `tidyverse` and `lubridate` packages. We started by installing and loading the necessary packages, then learned how to retrieve the current date and time. We also covered various methods to convert strings and numbers into date and date-time formats. Finally, we saw how to convert date-time objects back to simple date objects.
+
+Understanding how to manipulate dates and times is crucial for data analysis, especially when dealing with time series data or any data that includes temporal components. With the `lubridate` package, R makes it easy to perform these operations efficiently and intuitively.
+

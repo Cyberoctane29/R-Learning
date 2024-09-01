@@ -1,0 +1,128 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-transforming-data.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Transforming Data with R
+
+In this section, we will explore how to transform data in R using the `separate()`, `unite()`, and `mutate()` functions. These functions allow us to break up variables across multiple columns, combine existing columns, or even add new calculated values to a data frame.
+
+## Creating a Data Frame
+
+To start, we'll create a simple data frame that contains employee information, including names and job titles. This data frame will serve as the basis for applying various transformation functions.
+
+```{r}
+id <- c(1:10)
+
+name <- c("John Mendes", "Rob Stewart", "Rachel Abrahamson", "Christy Hickman", "Johnson Harper", "Candace Miller", "Carlson Landy", "Pansy Jordan", "Darius Berry", "Claudia Garcia")
+
+job_title <- c("Professional", "Programmer", "Management", "Clerical", "Developer", "Programmer", "Management", "Clerical", "Developer", "Programmer")
+
+employee <- data.frame(id, name, job_title)
+```
+
+Printing the entire employee data frame
+
+```{r}
+print(employee)
+```
+
+Displaying the first few rows of the data frame
+
+```{r}
+head(employee)
+```
+
+Glimpse of the data structure
+
+```{r}
+glimpse(employee)
+```
+
+Checking the structure of the data frame
+
+```{r}
+str(employee)
+```
+
+Skimming through the data without charts
+
+```{r}
+library(skimr)
+skim_without_charts(employee)
+```
+
+## Transforming Data: `separate()`, `unite()`, and `mutate()`
+
+## Separate Columns
+
+Right now, the first and last names are combined into one column. We can use the `separate()` function to split these into separate columns.
+Separating the 'name' column into 'first_name' and 'last_name'.
+
+```{r}
+separate(employee, name, into = c('first_name', 'last_name'), sep = " ")
+```
+
+## Unite Columns
+
+Next, we'll use the `unite()` function to merge the `first_name` and `last_name` columns back into a single `name` column.
+
+```{r}
+first_name <- c("John", "Rob", "Rachel", "Christy", "Johnson", "Candace", "Carlson", "Pansy", "Darius", "Claudia")
+
+last_name <- c("Mendes", "Stewart", "Abrahamson", "Hickman", "Harper", "Miller", "Landy", "Jordan", "Berry", "Garcia")
+
+job_title <- c("Professional", "Programmer", "Management", "Clerical", "Developer", "Programmer", "Management", "Clerical", "Developer", "Programmer")
+
+employee1 <- data.frame(id, first_name, last_name, job_title)
+```
+
+Merging the 'first_name' and 'last_name' columns into 'name'
+
+```{r}
+unite(employee1, 'name', first_name, last_name, sep = " ")
+```
+
+## Mutate Data
+
+In addition to separating and merging columns, we can also create new variables in our data frame using the `mutate()` function. For instance, we can add a new column with calculated values.
+
+Using the 'penguins' dataset to add a new column with body mass in kilograms
+
+```{r}
+library(palmerpenguins)
+
+penguins %>%
+  mutate(body_mass_kg = body_mass_g / 1000) %>%
+  select(body_mass_kg)
+```
+
+We can also create multiple new variables at once using `mutate()` by adding a comma between the calculations.
+Adding multiple new variables: body mass in kg and flipper length in cm
+
+```{r}
+penguins %>%
+  mutate(body_mass_kg = body_mass_g / 1000, flipper_length_cm = flipper_length_mm / 100) %>%
+  select(body_mass_kg, flipper_length_cm)
+```
+
+# Conclusion
+
+In this notebook, we've learned how to transform existing data in our tables and how to create new variables using `separate()`, `unite()`, and `mutate()`. These are fundamental tools for data manipulation in R, and as you practice, you might discover new ways to use them effectively in your analyses.
+

@@ -1,0 +1,84 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-same-data-different-outcome.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+## Exploring Anscombe's Quartet
+
+In this section, we will explore Anscombe's quartet, a famous dataset that demonstrates the importance of data visualization. Despite having nearly identical summary statistics, the datasets in Anscombe's quartet can look very different when visualized. We'll use various R packages to summarize and visualize the data, which will help us uncover these differences.
+
+### Install and Load Required Packages
+
+First, we'll install and load the necessary packages. This includes `Tmisc` for accessing the quartet data and `datasauRus` for creating engaging visualizations.
+
+```{r}
+install.packages("Tmisc")
+install.packages("datasauRus")
+```
+
+Load and View Anscombe's Quartet Data
+Now we'll load Anscombe's quartet data from the `Tmisc` package and view it. This dataset contains four different sets of x and y values that have nearly identical summary statistics.
+
+```{r}
+data("quartet")
+View(quartet)
+```
+
+## Summarize the Data
+Let's calculate the mean, standard deviation, and correlation for each set in the quartet. This summary will show us that, despite having similar summary statistics, the datasets may behave differently when plotted.
+
+```{r}
+quartet %>% 
+  group_by(set) %>% 
+  summarize(mean_x = mean(x), sd_x = sd(x), mean_y = mean(y), sd_y = sd(y), cor_xy = cor(x, y))
+```
+
+## Visualize the Data
+To understand the differences between the datasets, we'll create scatter plots with linear regression lines. This will help us see how the data points are distributed and how the relationships differ across the sets.
+
+```{r}
+ggplot(quartet, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = lm, se = FALSE) +
+  facet_wrap(~ set)
+```
+
+```{r}
+ggplot(quartet, aes(x = x, y = y)) +
+  geom_point() +
+  geom_smooth(method = lm) +
+  facet_wrap(~ set)
+```
+
+## Explore Additional Visualizations with datasauRus
+We'll use the `datasauRus` package to generate various creative plots of the Anscombe data. This package includes visualizations such as the famous "datasaurus" and other shapes, which illustrate how data can be represented in different ways.
+
+```{r}
+library(datasauRus)
+
+ggplot(datasaurus_dozen, aes(x = x, y = y, colour = dataset)) +
+  geom_point() +
+  theme_void() +
+  theme(legend.position = "none") +
+  facet_wrap(~ dataset, ncol = 3)
+```
+
+# Conclusion
+Through these visualizations, you'll see how Anscombe's quartet can appear different despite having similar statistical summaries. This highlights the importance of visualizing data to uncover insights that summary statistics alone may not reveal.
+

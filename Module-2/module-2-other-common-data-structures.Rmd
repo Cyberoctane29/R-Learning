@@ -1,0 +1,92 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-2-other-common-data-structures.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Data Structures in R
+
+In this section, we will explore data frames and matrices, two fundamental data structures in R. We'll also briefly cover working with files in R, which is essential for data import and export.
+
+
+## Data Frames
+
+Data frames are the most common way of storing and analyzing data in R. A data frame is similar to a spreadsheet or SQL table, where each column represents a variable, and each row is an observation.
+
+```{r}
+# Creating a data frame in R
+data.frame(x = c(1, 2, 3), y = c(1.5, 5.5, 7.5))
+```
+
+To extract a subset of a data frame, you can use the extract operator [] with row and column indices.
+
+```{r}
+# Example: Extracting an element from the data frame
+z <- data.frame(x = c(1, 2, 3), y = c(1.5, 5.5, 7.5))
+z[2, 1]  # Extracts the element from the second row, first column
+```
+
+## Files in R
+
+You can create, copy, and delete files directly from R, which is useful when working with data files.
+
+```{r}
+# Creating files in R
+file.create("new_text_file.txt") 
+file.create("new_word_file.docx") 
+file.create("new_csv_file.csv")
+```
+
+Copy a file to a new location:
+
+```{r}
+# Copying a file
+file.copy("new_text_file.txt", "destination_folder")
+```
+
+To delete a file:
+
+
+```{r}
+# Deleting a file
+unlink("new_csv_file.csv")
+```
+
+## Matrices
+Matrices are two-dimensional collections of data elements, where each element must be of the same data type.
+
+```{r}
+# Creating a 2x3 matrix in R
+matrix(c(3:8), nrow = 2)
+```
+
+You can also specify the number of columns:
+
+
+```{r}
+# Creating a matrix by specifying the number of columns
+matrix(c(3:8), ncol = 2)
+```
+
+Similar to data frames, you can extract elements from a matrix using the extract operator [ ].
+
+
+# Conclusion
+
+In this section, we've explored two essential data structures in R: data frames and matrices. Data frames are versatile and commonly used for storing and analyzing data, similar to spreadsheets or SQL tables. Matrices, on the other hand, are used for numerical data arranged in a two-dimensional format. Additionally, we covered basic file operations in R, which are crucial for managing data inputs and outputs. These foundational concepts are key as you continue to work with data in R, setting the stage for more advanced data manipulation and analysis.
+

@@ -1,0 +1,71 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-the-bias-function.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+## Introduction
+Welcome to this section where we'll explore how to quantify bias in data using R. Bias is an important concept in data analysis as it helps us understand how predictions deviate from actual outcomes. In this example, we'll use the `bias` function from the `SimDesign` package to compare actual and predicted values for different scenarios.
+
+First, we'll install and load the required package. 
+
+```{r}
+install.packages("SimDesign")
+library(SimDesign)
+```
+
+## Example 1: Weather Forecast Bias
+
+Let's start by assessing the bias in weather predictions. We'll compare actual temperatures with forecasted temperatures to determine if the predictions are biased.
+
+```{r}
+# Actual temperatures recorded
+actual_temp <- c(68.3, 70, 72.4, 71, 67, 70)
+
+# Forecasted temperatures
+predicted_temp <- c(67.9, 69, 71.5, 70, 67, 69)
+
+# Calculating bias
+bias(actual_temp, predicted_temp)
+```
+
+Running the `bias` function on this data returns a result of `0.71`. This indicates a slight bias towards lower temperatures in the predictions. While the bias isn't large, it suggests the forecast might need adjustments to improve accuracy.
+
+## Example 2: Sales Forecast Bias
+
+Next, we'll examine bias in sales forecasts for a game store. We'll compare actual sales numbers with predicted sales to evaluate if the store is overstocking or understocking.
+
+```{r}
+# Actual sales numbers
+actual_sales <- c(150, 203, 137, 247, 116, 287)
+
+# Predicted sales numbers
+predicted_sales <- c(200, 300, 150, 250, 150, 300)
+
+# Calculating bias
+bias(actual_sales, predicted_sales)
+```
+
+The `bias` function yields a result of `-35`, indicating a significant negative bias. This means the predictions are generally higher than the actual sales, suggesting that the store might be overordering stock.
+
+## Summary
+
+In this section, we used the `bias` function to compare actual outcomes with predicted values for weather and sales data. By quantifying bias, we can identify potential issues in prediction models and make informed decisions. An unbiased model would have a result close to zero, while a significant deviation indicates potential areas for improvement.
+
+As we continue to explore data analysis in R, understanding and addressing bias will help enhance the accuracy of our models and predictions. Stay tuned for more advanced data visualization techniques and further exploration of R's capabilities!
+

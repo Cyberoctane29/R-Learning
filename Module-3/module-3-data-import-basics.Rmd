@@ -1,0 +1,118 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-data-import-basics.ipynb"
+output: html_document
+---
+
+```{r}
+## This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Background for this Activity
+This lesson is focused on understanding the basics of data import in `R`. You will explore the `data()` function, `readr` package, and `readxl` package to work with different types of data sources. These tools are essential for importing and handling data in `R`.
+
+## The `data()` function
+The default installation of `R` comes with a number of preloaded datasets that you can practice with. This is a great way to develop your `R` skills and learn about some important data analysis functions.
+
+You can use the `data()` function to load these datasets in `R`. If you run the `data()` function without an argument, `R` will display a list of the available datasets:
+
+```{r}
+data()
+```
+
+To load a specific dataset, enter its name in the parentheses of the `data()` function. For example, let’s load the `mtcars` dataset:
+
+```{r}
+data(mtcars)
+```
+
+You can preview the dataset by typing its name in the console and pressing `ctrl` (or `cmd`) and `enter`:
+
+```{r}
+mtcars
+```
+
+Alternatively, you can display the dataset by clicking directly on its name in the Environment pane. This will run the `View()` function and display the dataset in the RStudio data viewer.
+
+# The `readr` package
+In addition to using `R`'s built-in datasets, it is also helpful to import data from other sources. The `readr` package in `R` is a great tool for reading rectangular data (i.e., data that fits nicely inside a rectangle of rows and columns).
+
+## Examples of rectangular data file types:
+`.csv` (comma-separated values)
+`.tsv` (tab-separated values)
+`.fwf` (fixed width files)
+`.log` (log files)
+The `readr` package is part of the core `tidyverse`. If you have already installed the `tidyverse`, you have what you need to start working with `readr`.
+
+## `readr` functions
+The goal of `readr` is to provide a fast and friendly way to read rectangular data. Here are some common functions:
+
+`read_csv()`: Reads comma-separated values (`.csv`) files
+`read_tsv()`: Reads tab-separated values files
+`read_delim()`: Reads general delimited files
+`read_fwf()`: Reads fixed-width files
+`read_table()`: Reads tabular files where columns are separated by white-space
+`read_log()`: Reads web log files
+
+## Reading a `.csv` file with `readr`
+Let's use the `read_csv()` function to read the `mtcars.csv` file:
+
+```{r}
+read_csv(readr_example("mtcars.csv"))
+```
+
+When you run this function, `R` prints out a column specification that gives the name and type of each column. It also prints a tibble with the dataset.
+
+# The `readxl` package
+To import spreadsheet data into `R`, you can use the `readxl` package. It supports both the legacy `.xls` file format and the modern xml-based `.xlsx` file format.
+
+## Loading `readxl`
+Since `readxl` is not a core `tidyverse` package, you need to load it explicitly:
+
+```{r}
+library(readxl)
+```
+
+## Reading an `.xlsx` file with `readxl`
+The `readxl` package comes with some sample files you can use for practice. You can list the sample files by running the following code:
+
+```{r}
+readxl_example()
+```
+
+To read an Excel file, use the `read_excel()` function. Here’s an example:
+
+```{r}
+read_excel(readxl_example("type-me.xlsx"))
+```
+
+You can also list the names of the individual sheets in the file:
+
+
+```{r}
+excel_sheets(readxl_example("type-me.xlsx"))
+```
+
+To read a specific sheet, use the `sheet` argument:
+
+
+```{r}
+read_excel(readxl_example("type-me.xlsx"), sheet = "numeric_coercion")
+```
+
+# Conclusion
+In this lesson, you explored the basics of data import in `R` using both built-in datasets and external data sources. You learned how to use the `data()` function to load preloaded datasets and practiced importing external data using the `readr` and `readxl` packages. These tools are essential for handling various types of data and preparing them for analysis in `R`.
+
+By mastering these functions, you can efficiently manage and manipulate data from different formats, making your data analysis workflows smoother and more effective. Keep experimenting with different datasets and file types to solidify your understanding of these concepts.
+

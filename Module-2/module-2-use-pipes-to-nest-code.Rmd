@@ -1,0 +1,92 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-2-use-pipes-to-nest-code.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Exploring Pipes in R
+
+Pipes are an essential tool in R that allow you to express a sequence of operations in a more readable and efficient manner. A pipe takes the output of one statement and makes it the input of the next statement. This helps avoid the complexity of nested functions and makes your code easier to understand.
+
+## Loading the ToothGrowth Dataset
+
+We'll use the ToothGrowth dataset, which contains data about the effect of vitamin C on the growth of teeth in guinea pigs. This dataset is already installed in R.
+
+```{r}
+# Loading the ToothGrowth dataset
+data("ToothGrowth")
+
+# Viewing the dataset
+View(ToothGrowth)
+```
+
+## Filtering and Sorting the Data
+
+Without pipes, you can filter and sort the dataset using nested functions or by creating a sequence of data frames.
+
+```{r}
+# Filtering and sorting without pipes
+filtered_tg <- filter(ToothGrowth, dose == 0.5)
+arranged_tg <- arrange(filtered_tg, len)
+
+# Using nested functions
+arranged_tg_nested <- arrange(filter(ToothGrowth, dose == 0.5), len)
+```
+
+## Using Pipes for Filtering and Sorting
+
+Let's now use pipes to perform the same operations more efficiently.
+
+```{r}
+# Filtering and sorting using pipes
+filtered_toothgrowth <- ToothGrowth %>%
+  filter(dose == 0.5) %>%
+  arrange(len)
+```
+
+In this example, the pipe operator %>% helps to chain together multiple operations. The dataset ToothGrowth is passed through the filter function and then through the arrange function.
+
+
+## Grouping and Summarizing with Pipes
+
+Now, we'll extend the pipe to group the data by the type of supplement (supp) and then calculate the average tooth length (len) for each supplement.
+
+```{r}
+# Grouping and summarizing using pipes
+summary_toothgrowth <- ToothGrowth %>%
+  filter(dose == 0.5) %>%
+  group_by(supp) %>%
+  summarize(mean_len = mean(len, na.rm = TRUE), .groups = "drop")
+```
+
+This pipe first filters the data, then groups it by the supplement type (supp), and finally summarizes it by calculating the mean tooth length for each group.
+
+
+## Key Points to Remember When Using Pipes
+
+Pipe Operator Placement: Add the pipe operator at the end of each line of a piped operation, except for the last one.
+Code Indentation: RStudio automatically indents lines of code that are part of a pipe. If a line isn't indented, it might not be included in the pipe, which could lead to errors.
+Ease of Modification: Pipes make it easy to modify your code by adding or changing steps without rewriting the entire sequence.
+Feel free to practice using pipes with the functions and operations we've covered so far!
+
+Pipes in R are a powerful tool that streamline the process of data manipulation by allowing you to chain multiple operations in a clear and concise manner. They enhance code readability and make it easier to debug and modify your scripts. In this exploration, we used the ToothGrowth dataset to demonstrate how pipes can be applied to filter, sort, group, and summarize data efficiently. By incorporating pipes into your workflow, you can write cleaner, more maintainable code, making your data analysis tasks in R both faster and more intuitive.
+
+# Conclusion
+
+Pipes in R are a powerful tool that streamline the process of data manipulation by allowing you to chain multiple operations in a clear and concise manner. They enhance code readability and make it easier to debug and modify your scripts. In this exploration, we used the ToothGrowth dataset to demonstrate how pipes can be applied to filter, sort, group, and summarize data efficiently. By incorporating pipes into your workflow, you can write cleaner, more maintainable code, making your data analysis tasks in R both faster and more intuitive.
+

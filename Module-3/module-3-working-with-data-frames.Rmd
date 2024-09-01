@@ -1,0 +1,92 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-3-working-with-data-frames.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Working with Data Frames in R
+
+Earlier, we learned about data frames and their key characteristics. Now, we'll start working with them. As a data analyst, a lot of your work will depend on data frames. If you don't create a data frame, your ability to work with your data will be limited.
+
+Think about spreadsheets—the basic structure of columns and rows carries over to R. Data frames are basically the data analyst's default way to interact with data. That's why knowing how to create and work with data frames is so important. Let's check out an example using R's built-in data frames.
+
+## Loading a Preloaded Dataset: Diamonds
+
+R and its packages come with many interesting datasets that you can easily access. We'll use a preloaded dataset containing information about diamonds. This dataset is part of the ggplot2 package in the tidyverse.
+
+```{r}
+# Load the ggplot2 package
+library(ggplot2)
+
+# Load the diamonds dataset
+data("diamonds")
+
+# View the diamonds data frame
+View(diamonds)
+```
+
+## Previewing the Dataset
+
+To avoid printing the full data frame to the console, which can be annoying and time-consuming, we can use the head() function to preview the first six rows of the dataset.
+
+```{r}
+# Preview the first six rows of the diamonds dataset
+head(diamonds)
+```
+
+## Exploring the Structure of the Data Frame
+
+We can use functions like str() and colnames() to get high-level information about the data frame, such as column names and the type of data contained in those columns.
+
+```{r}
+# Check the structure of the diamonds data frame
+str(diamonds)
+
+# Get the column names of the diamonds data frame
+colnames(diamonds)
+```
+
+Another useful function is glimpse(), which provides a concise summary of the data frame.
+
+
+```{r}
+# Use glimpse to check the diamonds data frame
+glimpse(diamonds)
+```
+
+## Modifying the Data Frame with mutate()
+
+We can use the mutate() function from the dplyr package to make changes to our data frame. For example, let's add a new column that multiplies the carat column by 100, making it easier to read.
+
+```{r}
+# Load the tidyverse package to access dplyr
+library(tidyverse)
+
+# Add a new column 'carat_2' to the diamonds data frame
+diamonds <- mutate(diamonds, carat_2 = carat * 100)
+
+# View the updated diamonds data frame
+head(diamonds)
+```
+
+# Conclusion
+
+Data frames are a fundamental aspect of data analysis in R, serving as a powerful tool for organizing and analyzing data. Understanding how to work with data frames, including loading, previewing, and modifying them, is crucial for any data analyst. In this notebook, we explored how to interact with data frames using built-in functions like head(), str(), and mutate().
+
+By mastering these techniques, you can efficiently manage and manipulate your data, setting a solid foundation for more complex analyses. Keep practicing with different datasets and functions to deepen your understanding and become proficient in R.
+
