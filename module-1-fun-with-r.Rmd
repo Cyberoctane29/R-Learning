@@ -1,0 +1,101 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-1-fun-with-r.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Title: Fun with R - Module 1: Scatter Plots with ggplot2
+# Introduction
+
+In this module, we will explore creating scatter plots using the ggplot2 package in R. We'll use the palmerpenguins dataset to visualize the relationship between flipper length and body mass of different penguin species.
+
+# 1. Load Necessary Libraries
+
+```{r}
+# Load necessary packages (ggplot2 is part of tidyverse, so it's already loaded)
+library(tidyverse)
+library(palmerpenguins)
+```
+
+# 2. Basic Scatter Plot
+
+Create a basic scatter plot to visualize the relationship between flipper length and body mass.
+
+```{r}
+# Create a scatter plot of flipper length vs. body mass
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+```
+
+# 3. Handle Missing Values
+
+Handle missing values by removing them explicitly before plotting.
+
+```{r}
+# Remove rows with missing values
+penguins_clean <- na.omit(penguins)
+
+# Create the plot with cleaned data
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+```
+
+# 4. Adding Color and Shape Aesthetics
+
+Enhance the scatter plot by adding color and shape based on species.
+
+```{r}
+# Plot with color aesthetics
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point(aes(color = species))
+
+# Plot with shape aesthetics
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point(aes(shape = species))
+
+# Plot with both color and shape aesthetics
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point(aes(shape = species, color = species))
+```
+
+# 5. Faceting the Plot
+
+Use faceting to create individual plots for each species.
+
+```{r}
+# Facet the plot by species
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point(aes(shape = species, color = species)) +
+  facet_wrap(~ species)
+```
+
+# 6. Adding Titles
+
+Add a title to the faceted plot for better presentation.
+
+```{r}
+# Add title to the plot
+ggplot(data = penguins_clean, aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point(aes(shape = species, color = species)) +
+  facet_wrap(~ species) + 
+  labs(title = "Palmer Penguins: Body Mass vs. Flipper Length")
+```
+
+Conclusion
+This module demonstrated how to create and enhance scatter plots using ggplot2, handle missing data, and use faceting to compare different groups within the data.
+
