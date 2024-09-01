@@ -1,0 +1,116 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-5-code-chunks.ipynb"
+output: html_document
+---
+
+```{python}
+# This Python 3 environment comes with many helpful analytics libraries installed
+# It is defined by the kaggle/python Docker image: https://github.com/kaggle/docker-python
+# For example, here's several helpful packages to load
+
+import numpy as np # linear algebra
+import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+import os
+for dirname, _, filenames in os.walk('/kaggle/input'):
+    for filename in filenames:
+        print(os.path.join(dirname, filename))
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Introduction
+
+In this analysis, we will explore the Palmer Penguins dataset using the `tidyverse` and `ggplot2` packages in R. This report is structured to include code chunks that generate visualizations and analyze the data, along with explanations to help understand the results. The purpose is to create a report that can be shared with stakeholders, showcasing our findings effectively.
+
+## Setting Up My Environment
+
+Before we begin the analysis, we need to set up our R environment by loading the required packages. These packages will provide us with the tools needed for data manipulation and visualization.
+
+## Understanding the Data
+
+Let's start by getting a glimpse of the Palmer Penguins dataset to understand its structure and the type of data we are dealing with.
+
+```{python}
+# View the structure of the penguins dataset
+glimpse(penguins)
+```
+
+## Visualizing Flipper Length vs. Body Mass
+
+Next, we'll create some visualizations to explore the relationship between flipper length and body mass across different species of penguins.
+
+##Scatter Plot with Species Color
+
+This first plot shows the relationship between flipper length and body mass, with points colored by penguin species. This allows us to visually distinguish between species based on these two variables.
+
+```{python}
+# Scatter plot with species color
+penguins %>%
+  drop_na(sex) %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species), shape = species) +
+  facet_wrap(~sex) +
+  labs(title = "Flipper Length vs Body Mass by Species and Sex",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)",
+       color = "Species") +
+  theme_minimal()
+```
+
+## Simple Scatter Plot with a Single Color
+
+Here, we visualize the same relationship between flipper length and body mass but with all points colored purple. This simplifies the plot to focus on the general trend rather than species differences.
+
+```{python}
+# Simple scatter plot with all points in purple
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(color = "purple") +
+  labs(title = "Flipper Length vs Body Mass",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)") +
+  theme_minimal()
+```
+
+## Scatter Plot with Species Shape
+
+In this plot, we differentiate species by using different shapes for each species. This is another way to visualize species differences without relying on color.
+
+```{python}
+# Scatter plot with species shape
+ggplot(data = penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(shape = species)) +
+  labs(title = "Flipper Length vs Body Mass by Species",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)",
+       shape = "Species") +
+  theme_minimal()
+```
+
+## Combining Color and Shape with Facets
+
+Finally, we'll create a plot that combines color and shape to differentiate species and use faceting to separate the data by sex. This comprehensive visualization allows us to see how the relationship between flipper length and body mass varies by both species and sex.
+
+```{python}
+# Combined plot with species color and shape, faceted by sex
+penguins %>%
+  drop_na(sex) %>%
+  ggplot(aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species, shape = species)) +
+  facet_wrap(~sex) +
+  labs(title = "Flipper Length vs Body Mass by Species and Sex",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)",
+       color = "Species",
+       shape = "Species") +
+  theme_minimal()
+```
+
+# Conclusion
+
+This report demonstrates how to analyze and visualize the Palmer Penguins dataset using R. By combining different visualization techniques, we can gain insights into how various factors like species and sex influence the relationship between flipper length and body mass. This report is now ready to be shared with stakeholders as a comprehensive analysis document.
+

@@ -1,0 +1,160 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-2-logical-operators-and-condn-al-statement.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Logical Operators and Conditional Statements
+
+In this section, we will explore logical operators and conditional statements in R. Understanding these concepts is crucial for making decisions based on conditions in your code.
+
+## Logical Operators
+
+Logical operators return logical values such as TRUE or FALSE. The three primary logical operators in R are:
+
+AND (&)
+OR (|)
+NOT (!)
+
+## AND Operator &
+The AND operator checks if both conditions are TRUE. It returns TRUE only if both conditions are true.
+
+```{r}
+# Examples of AND operator
+TRUE & TRUE
+TRUE & FALSE
+FALSE & TRUE
+FALSE & FALSE
+```
+
+You can use the AND operator with variables as well:
+
+
+```{r}
+# Example: Check if x is greater than 3 and less than 12
+x <- 10
+x > 3 & x < 12
+```
+
+If x is changed to 20, the result will be different:
+
+
+```{r}
+x <- 20
+x > 3 & x < 12
+```
+
+## OR Operator |
+The OR operator returns TRUE if at least one of the conditions is TRUE.
+
+```{r}
+# Examples of OR operator
+TRUE | TRUE
+TRUE | FALSE
+FALSE | TRUE
+FALSE | FALSE
+```
+
+You can use the OR operator to check conditions like this:
+
+```{r}
+# Example: Check if y is less than 8 or greater than 16
+y <- 7
+y < 8 | y > 16
+```
+
+If y is changed to 12, the result will be:
+
+
+```{r}
+y <- 12
+y < 8 | y > 16
+```
+
+## NOT Operator !
+The NOT operator negates the logical value. It returns FALSE for TRUE and TRUE for FALSE.
+
+```{r}
+# Examples of NOT operator
+!TRUE
+!FALSE
+```
+
+You can use the NOT operator with variables as well:
+
+
+```{r}
+# Example: Check if x is NOT true (non-zero value)
+x <- 2
+!x
+```
+
+## Conditional Statements
+
+Conditional statements in R allow you to execute code only if certain conditions are met. The primary conditional statements are:
+
+if()
+else
+else if()
+
+## if Statement
+The if statement checks a condition and executes the code inside the curly braces if the condition is TRUE.
+
+```{r}
+# Example: Check if x is positive
+x <- 4
+
+if (x > 0) {
+  print("x is a positive number")
+}
+```
+
+## else Statement
+The else statement is used after an if statement to execute code when the if condition is FALSE.
+
+```{r}
+# Example: Check if x is positive or not
+x <- 7
+
+if (x > 0) {
+  print("x is a positive number")
+} else {
+  print("x is either a negative number or zero")
+}
+```
+
+## else if Statement
+The else if statement adds additional conditions to an if-else structure.
+
+```{r}
+# Example: Check if x is negative, zero, or positive
+x <- -1
+
+if (x < 0) {
+  print("x is a negative number")
+} else if (x == 0) {
+  print("x is zero")
+} else {
+  print("x is a positive number")
+}
+```
+
+# Conclusion
+
+In conclusion, logical operators and conditional statements are fundamental tools in R that allow for the execution of code based on specific conditions. Logical operators like AND, OR, and NOT help evaluate multiple conditions, returning TRUE or FALSE based on the input. Conditional statements such as if, else, and else if provide a way to control the flow of a program by executing certain blocks of code only when specific conditions are met. Mastering these concepts is essential for effective data analysis and decision-making in R programming.
+

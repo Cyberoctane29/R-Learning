@@ -1,0 +1,132 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-doing-more-with-ggplot.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+## Introduction
+
+In this section, we explore different `geom` functions in ggplot2 to create various types of plots. Each `geom` function represents a different type of visual object, such as points, bars, or lines. By choosing the appropriate `geom`, you can represent your data in different ways and tailor your visuals to effectively communicate your findings.
+
+Let's start with some examples using the penguins dataset.
+
+## Geom Functions
+
+### Scatter Plots with Points
+
+The `geom_point` function creates scatter plots by using points to represent the data:
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+data(penguins)
+```
+
+```{r}
+# Scatter plot
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+```
+
+### Smooth Lines
+
+The `geom_smooth` function fits a smooth line to the data, showing trends more clearly:
+
+```{r}
+# Smooth line
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_smooth()
+```
+
+## Combining Points and Smooth Lines
+You can combine `geom_point` and `geom_smooth` to show both individual data points and the trend line:
+
+```{r}
+# Combining geom_point and geom_smooth
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point() +
+  geom_smooth()
+```
+
+### Lines
+
+The `geom_line` function connects data points with lines, useful for showing trends over time or sequences:
+
+```{r}
+# Line plot
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_line()
+```
+
+### Jitter
+
+The `geom_jitter` function adds a small amount of random noise to each point, which helps with over-plotting:
+
+```{r}
+# Jittered scatter plot
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_jitter()
+```
+
+## Bar Charts
+
+The `geom_bar` function creates bar charts. By default, it counts the occurrences of each x-value:
+
+```{r}
+data(diamonds)
+```
+
+```{r}
+# Bar chart
+ggplot(diamonds, aes(x = cut)) +
+  geom_bar()
+```
+
+### Adding Color and Fill
+
+You can use the `color` aesthetic to change the outline color of bars and the `fill` aesthetic to color the inside of the bars:
+
+```{r}
+# Outline color
+ggplot(diamonds, aes(x = cut, color = cut)) +
+  geom_bar()
+```
+
+```{r}
+# Fill color
+ggplot(diamonds, aes(x = cut, fill = cut)) +
+  geom_bar()
+```
+
+Stacked Bar Charts
+To create a stacked bar chart, map a new variable to the `fill` aesthetic:
+
+```{r}
+# Stacked bar chart
+ggplot(diamonds, aes(x = cut, fill = clarity)) +
+  geom_bar()
+```
+
+## Interpretation
+
+In the stacked bar chart, each bar represents a different cut of diamonds, and the colors within each bar represent different clarity levels. For example, you can see the number of diamonds with different clarity levels within each cut. This allows for a detailed comparison between cuts and clarities.
+
+# Conclusion
+
+We explored various `geom` functions in ggplot2, including `geom_point`, `geom_smooth`, `geom_line`, `geom_jitter`, and `geom_bar`. Each function provides a different way to visualize your data. As you continue to analyze data, you'll find more `geom` functions and options available in ggplot2 and its extension packages.
+

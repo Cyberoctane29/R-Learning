@@ -1,0 +1,83 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-getting-started-with-ggplot.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Exploring the Palmer Penguins Data with ggplot2
+
+In this notebook, we will use the Palmer Penguins dataset to create visualizations using `ggplot2`. This dataset contains size measurements for three species of penguins that live in the Palmer Archipelago, Antarctica. We will learn how to plot the relationship between different variables using `ggplot2`.
+
+Before we start, make sure that you have the necessary packages installed and loaded.
+
+## Setup
+
+First, we need to install and load the required packages. We'll use `tidyverse` which includes `ggplot2` for creating plots and `palmerpenguins` for accessing the dataset.
+
+```{r}
+install.packages("tidyverse")
+
+library(tidyverse)
+
+install.packages("palmerpenguins")
+
+library(palmerpenguins)
+```
+
+## Plotting Body Mass vs. Flipper Length
+
+Let's create a scatter plot to visualize the relationship between body mass and flipper length for the penguins. We'll use `ggplot2` to generate this plot.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point() +
+  labs(x = "Flipper Length (mm)", y = "Body Mass (g)", 
+       title = "Scatter Plot of Body Mass vs. Flipper Length")
+```
+
+## Plotting Bill Length vs. Bill Depth
+
+Now, let's create a scatter plot to visualize the relationship between bill length and bill depth. This will help us understand how these measurements relate to each other.
+
+```{r}
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() +
+  labs(x = "Bill Length (mm)", y = "Bill Depth (mm)", 
+       title = "Scatter Plot of Bill Length vs. Bill Depth")
+```
+
+## Help and Resources
+
+If you need more information about any `ggplot2` function, you can use the help feature in R. For example, to learn more about `geom_point`, run:
+
+```{r}
+??geom_point
+
+??tidyverse
+```
+
+## Conclusion
+
+In this notebook, we explored how to use `ggplot2` to visualize data from the Palmer Penguins dataset. We created scatter plots to examine the relationships between body mass and flipper length, as well as bill length and bill depth. 
+
+These visualizations help us understand the correlations between different measurements and provide insights into the characteristics of penguins in the Palmer Archipelago. 
+
+By following the steps demonstrated here—setting up the plot with `ggplot()`, adding layers with `geom_point()`, and mapping variables with `aes()`—you can create various types of plots and explore different aspects of your data.
+
+Feel free to experiment with other variables and geoms, and use the help resources provided to deepen your understanding of `ggplot2` and data visualization techniques. Happy plotting!
+

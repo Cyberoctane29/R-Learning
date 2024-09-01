@@ -1,0 +1,82 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-hoa-visualizing-data-with-ggplot2.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Introduction to Data Visualization with `ggplot2`
+
+In this notebook, we will explore the basics of creating visualizations in R using the `ggplot2` package.The `ggplot2` package allows us to create high-quality, customizable plots based on the grammar of graphics, which is a systematic way of constructing visualizations from basic building blocks.
+
+## Installing and Loading Required Packages
+
+First, we need to install and load the `ggplot2` package along with the `palmerpenguins` dataset, which we will use for our visualizations.
+
+Install ggplot2 and palmerpenguins packages
+
+```{r}
+install.packages("ggplot2")
+install.packages("palmerpenguins")
+```
+
+Load the packages into the R session
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+```
+
+## Exploring the Palmer Penguins Dataset
+
+Let's load the `penguins` dataset and take a quick look at its structure.This dataset contains measurements for three species of penguins: Adelie, Chinstrap, and Gentoo,including variables like body mass, flipper length, and bill length.
+
+Load and view the penguins dataset
+
+```{r}
+data(penguins)
+View(penguins)
+```
+
+## Creating a Scatterplot with `ggplot2`
+
+We will create a scatterplot to visualize the relationship between two variables: 
+flipper length and body mass of the penguins. 
+This plot will help us understand how these two measurements are related across different penguin species.
+
+Create a scatterplot of flipper length vs body mass
+
+```{r}
+ggplot(data = penguins) + 
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g))
+```
+
+## Alternative Syntax for Mapping Aesthetics
+
+The same plot can be created using a slightly different syntax where the mapping of aesthetics is done inside the `ggplot()` function call. This alternative method allows for a more concise code structure.
+
+Alternative syntax for the same scatterplot
+
+```{r}
+ggplot(data = penguins, mapping = aes(x = flipper_length_mm, y = body_mass_g)) + 
+  geom_point()
+```
+
+# Conclusion
+
+These examples demonstrate the basic steps of creating a scatterplot using `ggplot2`. As you continue exploring `ggplot2`, you'll learn how to customize and enhance your visualizations further. The `ggplot2` cheat sheet is a great resource to keep handy as you dive deeper into data visualization in R.
+

@@ -1,0 +1,114 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-aesthetics-and-facets.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Introduction
+
+In this lesson, we’ll explore how to use `ggplot2` facet functions to display subsets of data in individual plots. Faceting allows us to break down complex data and focus on relationships between different variables.
+
+# Facet Wrap
+
+The `facet_wrap()` function is used when you want to facet your plot by a single variable. Let's start by creating separate plots for each species of penguin to examine the relationship between flipper length and body mass.
+
+```{r}
+# Load the necessary libraries and data
+library(ggplot2)
+library(palmerpenguins)
+```
+
+```{r}
+data(penguins)
+```
+
+```{r}
+# Create a scatter plot faceted by species
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point() +
+  facet_wrap(~ species)
+```
+
+## Adding Color by Species
+
+You can also color the points based on species, making it easier to distinguish between the different groups.
+
+```{r}
+# Scatter plot with color aesthetics applied to species
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  facet_wrap(~ species)
+```
+
+## Alternative Syntax
+
+You can also specify the color aesthetic inside the `geom_point()` function, which is useful if you plan to add other geoms that should not use the color aesthetic.
+
+```{r}
+# Alternative syntax for adding color aesthetics
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(aes(color = species)) +
+  facet_wrap(~ species)
+```
+
+## Facet Grid
+
+When you want to facet by two variables, use `facet_grid()`. This function will split the plot into facets vertically by the first variable and horizontally by the second.
+
+```{r}
+# Scatter plot faceted by both sex and species
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  facet_grid(sex ~ species)
+```
+
+## Focusing on One Variable
+
+You can also focus your facet grid on just one of the variables. For example, let's create a grid by species only.
+
+```{r}
+# Facet grid by species only
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  facet_grid(~ species)
+```
+
+## Applying Facets to Other Data
+
+Faceting is not limited to scatter plots. You can use it with other plot types, such as bar charts. Let's apply faceting to the `diamonds` dataset.
+
+```{r}
+# Bar chart faceted by cut
+data(diamonds)
+
+ggplot(diamonds, aes(x = cut, fill = cut)) +
+  geom_bar() +
+  facet_wrap(~ cut)
+```
+
+```{r}
+# Bar chart faceted by cut with fill based on clarity
+ggplot(diamonds, aes(x = cut, fill = clarity)) +
+  geom_bar() +
+  facet_wrap(~ cut)
+```
+
+# Conclusion
+
+Faceting with ggplot2 is a powerful way to organize and display complex data. Whether you're breaking down your data by one variable or multiple variables, facets help you uncover important patterns and relationships that might be hidden in a single plot.
+

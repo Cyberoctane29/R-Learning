@@ -1,0 +1,135 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-annotation-layer.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Customizing Plots with Labels and Annotations
+
+In this section, we'll learn how to enhance our ggplot2 visualizations by adding titles, subtitles, captions, and annotations. These elements help clarify the purpose of your plot, highlight key points, and make your data more accessible to your audience.
+
+Let's start by loading the necessary libraries.
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+
+data = penguins
+```
+
+## Adding a Title
+
+We can use the `labs()` function to add a title to our plot. Titles are important for quickly conveying the purpose of your visualization.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(title = "Palmer Penguins: Body Mass vs Flipper Length")
+```
+
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(title = "Palmer Penguins: Body Mass vs Flipper Length")
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Palmer Penguins: Body Mass vs Flipper Length",
+    subtitle = "Sample of Three Penguin Species"
+  )
+```
+
+## Adding a Caption
+
+Captions are useful for citing the source of your data or providing any other relevant information. They are displayed at the bottom of the plot.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Palmer Penguins: Body Mass vs Flipper Length",
+    subtitle = "Sample of Three Penguin Species",
+    caption = "Data collected by Dr. Kristen Gorman"
+  )
+```
+
+## Adding Annotations
+
+Annotations allow you to add custom text directly inside your plot, making it easy to call out specific data points. We can use the `annotate()` function for this.
+
+```{r}
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Palmer Penguins: Body Mass vs Flipper Length",
+    subtitle = "Sample of Three Penguin Species",
+    caption = "Data collected by Dr. Kristen Gorman"
+  ) +
+  annotate("text", x = 220, y = 3500, label = "The Gentoos are the largest", 
+           color = "purple", fontface = "bold", size = 4.5, angle = 25)
+```
+
+## Using Variables to Store Plots
+
+As your code gets longer, it can be useful to store your plot in a variable. This makes it easier to reuse and modify the plot without rewriting the entire code.
+
+```{r}
+p <- ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Palmer Penguins: Body Mass vs Flipper Length",
+    subtitle = "Sample of Three Penguin Species",
+    caption = "Data collected by Dr. Kristen Gorman"
+  )
+
+# Printing the plot
+p
+
+# Adding an annotation to the stored plot
+p + annotate("text", x = 220, y = 3500, label = "The Gentoos are the largest", 
+             color = "purple", fontface = "bold", size = 4.5, angle = 25)
+```
+
+## Storing the Entire Plot
+
+You can also store the entire customized plot into a variable, making it even more flexible for future use.
+
+```{r}
+whole <- ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point() +
+  labs(
+    title = "Palmer Penguins: Body Mass vs Flipper Length",
+    subtitle = "Sample of Three Penguin Species",
+    caption = "Data collected by Dr. Kristen Gorman"
+  ) +
+  annotate("text", x = 220, y = 3500, label = "The Gentoos are the largest", 
+           color = "purple", fontface = "bold", size = 4.5, angle = 25)
+
+# Printing the stored plot
+whole
+```
+
+# Conclusion
+
+In this section, we explored how to enhance our ggplot2 visualizations by adding titles, subtitles, captions, and annotations. These features are crucial for making your plots more informative and engaging. By customizing the look and feel of your plots, you can better communicate the story behind your data.
+
+We also learned how to manage long pieces of code by storing plots in variables, making it easier to modify and reuse them. With these tools, you're now better equipped to create clear and effective visualizations that can capture your audience's attention and convey your insights more effectively.
+
+Keep practicing these techniques, and you'll continue to improve your data visualization skills. Happy plotting!
+

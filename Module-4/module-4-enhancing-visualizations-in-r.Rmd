@@ -1,0 +1,151 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-enhancing-visualizations-in-r.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+## Introduction
+
+In this video, you'll learn how to change the aesthetics of your visuals to present your data in a more compelling way. Aesthetics help highlight key points in your data and communicate more effectively with stakeholders. 
+
+An aesthetic is a visual property of an object in your plot. For instance, in a scatter plot, aesthetics include the size, shape, or color of your data points. You can display a point in different ways by adjusting its aesthetics.
+
+## Basic Aesthetics
+
+Let's review the code for plotting the relationship between body mass and flipper length using the penguins dataset. We start by mapping variables to the x and y axes using the `aes` function.
+
+```{r}
+library(ggplot2)
+
+install.packages("palmerpenguins")
+
+library(palmerpenguins)
+
+data(penguins)
+```
+
+```{r}
+# Basic scatter plot
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point()
+```
+
+### Adding Color
+
+To differentiate between penguin species, we can map the `species` variable to the `color` aesthetic:
+
+```{r}
+# Aesthetic - color
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species)) +
+  geom_point()
+```
+
+### Adding Shape
+
+Similarly, you can use the `shape` aesthetic to represent different penguin species with distinct shapes:
+
+```{r}
+# Aesthetic - shape
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, shape = species)) +
+  geom_point()
+```
+
+### Combining Color and Shape
+
+Combining multiple aesthetics, such as color and shape, allows for more nuanced visual differentiation:
+
+```{r}
+# Multiple aesthetics - color and shape
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species)) +
+  geom_point()
+```
+
+### Adding Smoothing
+
+You can add smoothing to visualize trends more clearly. Here’s how to include `geom_smooth()` with different methods:
+
+```{r}
+# Smoothing with loess
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+```
+
+```{r}
+# Smoothing with gam
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x))
+```
+
+### Adding Labels
+
+Enhance your plot by adding titles and axis labels:
+
+```{r}
+# Adding labels
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species)) +
+  geom_point() +
+  geom_smooth(method = "gam", formula = y ~ s(x)) +
+  labs(title = "Flipper Length vs. Body Mass by Species",
+       x = "Flipper Length (mm)",
+       y = "Body Mass (g)")
+```
+
+### Adding Size and Alpha
+
+You can further differentiate your data by mapping additional aesthetics such as size and alpha (transparency):
+
+```{r}
+# Multiple aesthetics - color, shape, and size
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species, size = species)) +
+  geom_point()
+```
+
+```{r}
+# Alpha aesthetic
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, color = species, shape = species, size = species, alpha = species)) +
+  geom_point()
+```
+
+```{r}
+# Only alpha
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g, alpha = species)) +
+  geom_point()
+```
+
+### Setting Aesthetic Apart
+
+If you want to set a global aesthetic (e.g., color all points the same), place the aesthetic code outside of `aes()`:
+
+```{r}
+# Global aesthetic - color
+ggplot(penguins, aes(x = flipper_length_mm, y = body_mass_g)) +
+  geom_point(color = "purple")
+```
+
+```{r}
+# Equivalent
+ggplot(penguins) +
+  geom_point(aes(x = flipper_length_mm, y = body_mass_g), color = "purple")
+```
+
+# Conclusion
+
+We covered common aesthetics in `ggplot2`, including color, shape, size, and alpha, and demonstrated how they can enhance your visualizations. Feel free to revisit these concepts and practice using the `ggplot2` package to make your data visualizations more informative and engaging. 
+

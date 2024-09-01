@@ -1,0 +1,75 @@
+---
+title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-4-saving-your-visualizations.ipynb"
+output: html_document
+---
+
+```{r}
+# This R environment comes with many helpful analytics packages installed
+# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
+# For example, here's a helpful package to load
+
+library(tidyverse) # metapackage of all tidyverse packages
+
+# Input data files are available in the read-only "../input/" directory
+# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
+
+list.files(path = "../input")
+
+# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
+# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
+```
+
+# Saving Your Plots
+
+Being able to save your plots is crucial for sharing your work and continuing your analysis later. In this section, we'll explore two methods for saving plots in ggplot2: using the Export option in RStudio and the `ggsave` function.
+
+We'll start by creating a plot and then save it using both methods.
+
+Let's begin by loading the necessary libraries and creating a plot that shows the relationship between body mass and flipper length in three penguin species.
+
+```{r}
+library(ggplot2)
+library(palmerpenguins)
+
+data(penguins)
+
+# Creating a plot
+ggplot(penguins) +
+  geom_point(mapping = aes(x = flipper_length_mm, y = body_mass_g, color = species))
+```
+
+## Saving Using the Export Option
+
+In RStudio, you can use the Export option in the Plots tab to save your plot. This method allows you to save your plot in various formats, such as PNG or JPEG.
+
+1. Create your plot.
+2. Go to the Plots tab in RStudio.
+3. Click on the Export button.
+4. Choose your desired image format (e.g., PNG).
+5. Name your file and click Save.
+
+Your plot will be saved in the specified format and can be found in the Files tab.
+
+## Saving Using `ggsave`
+
+The `ggsave` function is a convenient way to save the last plot you displayed. By default, `ggsave` saves the plot as a PNG file, but you can specify other formats as well. 
+
+Here's how to save your plot using `ggsave`:
+
+```{r}
+# Save the plot as a PNG file
+ggsave("Three_penguin_species_saved_with_ggsave.png")
+```
+
+### Three_penguin_species_saved_with_ggsave.png
+
+![Three penguin species-saved with ggsave.png](attachment:2528831b-9010-4b3d-a714-a1d8e3541c27.png)
+
+# Conclusion
+
+We’ve covered how to save your plots using both the Export option in RStudio and the `ggsave` function. Saving your plots ensures that you can access and share your work later, making it easier to collaborate with others and keep track of your progress.
+
+You’ve now learned the basics of creating, customizing, and saving plots in ggplot2. Keep practicing to become more proficient with data visualization in R. As you continue your journey, you’ll find that these skills will be invaluable in presenting and analyzing data effectively.
+
+Feel free to revisit the videos and code examples anytime. Practice is key to mastering these concepts, and the more you use ggplot2, the more comfortable you'll become. Happy plotting!
+
