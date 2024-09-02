@@ -1,6 +1,12 @@
 ---
-title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-5-code-chunks.ipynb"
-output: html_document
+title: "Module 5: Code Chunks"
+author: "Saswat Seth"
+date: "`r Sys.Date()`"
+output: 
+  html_document:
+    toc: true
+    fig_width: 7
+    fig_height: 5
 ---
 
 ```{python}

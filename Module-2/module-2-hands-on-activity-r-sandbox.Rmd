@@ -1,23 +1,13 @@
 ---
-title: An R Markdown document converted from "C:\Users\saswa\Downloads\module-2-hands-on-activity-r-sandbox.ipynb"
-output: html_document
+title: "Module 2: Hands-on Activity - R Sandbox"
+author: "Saswat Seth"
+date: "`r Sys.Date()`"
+output: 
+  github_document:
+    toc: true
+    fig_width: 7
+    fig_height: 5
 ---
-
-```{r}
-# This R environment comes with many helpful analytics packages installed
-# It is defined by the kaggle/rstats Docker image: https://github.com/kaggle/docker-rstats
-# For example, here's a helpful package to load
-
-library(tidyverse) # metapackage of all tidyverse packages
-
-# Input data files are available in the read-only "../input/" directory
-# For example, running this (by clicking run or pressing Shift+Enter) will list all files under the input directory
-
-list.files(path = "../input")
-
-# You can write up to 20GB to the current directory (/kaggle/working/) that gets preserved as output when you create a version using "Save & Run All" 
-# You can also write temporary files to /kaggle/temp/, but they won't be saved outside of the current session
-```
 
 # Background for this activity
 Welcome to the sandbox. This activity is going to provide you with the opportunity to preview some of the cool things you can do in `R` that you will be learning in this course. You will learn more about working with packages and data and try out some important functions.  

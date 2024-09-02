@@ -1,6 +1,6 @@
 ---
-title: "Fun with R - Module 1: Scatter Plots with ggplot2"
-author: "Your Name"
+title: "Module 1: Fun with R -  Scatter Plots with ggplot2"
+author: "Saswat Seth"
 date: "`r Sys.Date()`"
 output: 
   github_document:
